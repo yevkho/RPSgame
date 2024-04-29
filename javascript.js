@@ -20,53 +20,51 @@ function getHumanChoice () {
     if (x === "rock" || x === "paper" || x === "scissors") {
         return x
     } else {
-        console.log("Wrong input!")
+        console.log("Wrong input")
         x = getHumanChoice();
         return x;
         // not sure if the best, can't do a custom 'wrong input' message.
     }    
 }
 
-let humanScore = 0;
-let computerScore = 0;
-// does not recognise these variables if U put them in playRound
-
 function playGame() {
+
+    let humanScore = 0;
+    let computerScore = 0;
+
     function playRound(humanChoice, computerChoice) {
         if (humanChoice === "rock" && computerChoice === "scissors") {
             console.log("You win! Paper beats Rock");
-            humanScore = humanScore + 1;
+            humanScore += 1;
         } else if (humanChoice === "scissors" && computerChoice === "paper") {
             console.log("You win! Scissors beats Paper");
-            humanScore = humanScore + 1;
+            humanScore += 1;
         } else if (humanChoice === "paper" && computerChoice === "rock") {
             console.log("You win! Paper beats Rock");
-            humanScore = humanScore + 1;
+            humanScore += 1;
         } else if (humanChoice === computerChoice) {
             console.log("It's a tie!");
         } else {
             console.log("You loose!");
-            computerScore = computerScore + 1;
-            // I could have *3 to match human, but may be a better solution.
+            computerScore += 1;
+            // could *3 to match human, but there may be a better solution.
         }
-        console.log(humanScore, computerScore)
+        console.log(`You get ${humanScore}, Computer gets ${computerScore}`)
     } 
 
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-      
-    playRound(humanSelection, computerSelection);
-    
+    for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+
+    if (humanScore > computerScore) {
+        console.log("You Won the Game!")
+    } else if (humanScore < computerScore) {
+        console.log("You Lost the Game...")
+    } else {
+        console.log("It's a tie.")
+    }
 }
 
-for (let i = 0; i < 5; i++) {
-    playGame();
-  }
-
-if (humanScore > computerScore) {
-    console.log("You Won the Game!")
-} else if (humanScore < computerScore) {
-    console.log("You Lost the Game...")
-} else {
-    console.log("It's a tie.")
-}
+playGame()
